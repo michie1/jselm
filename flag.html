@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>JS with Elm</title>
+    <script>
+      var color = 'red';
+      var counter = 3;
+
+      function changeColor() {
+        document.getElementById('color').innerHTML = color;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>JS</h2>
+    <div id="color">Default</div>
+
+    <button id="changeColor" onclick="changeColor()">Change color</button>
+
+    <h2>Elm</h2>
+    <div id="flag"></div>
+    <script src="flag.js"></script>
+
+    <script>
+      var node = document.getElementById('flag');
+      var app = Elm.Main.embed(node, {
+        counter: counter
+      });
+    </script>
+  </body>
+</html>

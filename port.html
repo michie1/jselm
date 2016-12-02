@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>JS with Elm</title>
+    <script>
+      function changeJSColor(color) {
+        console.log('JS: ', color);
+        document.getElementById('color').innerHTML = color;
+      }
+
+      function changeElmColor(color) {
+        app.ports.toElm.send(color);
+      }
+
+    </script>
+  </head>
+  <body>
+    <h2>JS</h2>
+    Color: <span id="color">default</span>
+    <br />
+
+    <button id="changeColor" onclick="changeElmColor('yellow')">Change Elm color to yellow</button>
+
+    <h2>Elm</h2>
+    <div id="port"></div>
+    <script src="port.js"></script>
+
+    <script>
+      var node = document.getElementById('port');
+      var app = Elm.Port.embed(node);
+
+      app.ports.toJS.subscribe(function (foo) {
+        changeJSColor('purple');
+      });
+    </script>
+  </body>
+</html>
